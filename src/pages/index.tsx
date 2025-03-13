@@ -7,8 +7,11 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
+import { useTranslation } from "react-i18next";
 
 export default function IndexPage() {
+  const { t } = useTranslation();
+
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -19,6 +22,8 @@ export default function IndexPage() {
           <span className={title()}>
             بیمه هوشمند و شرافتمند در ایران و شهر زیبای تبریز
           </span>
+          <h1>{t("welcome")}</h1>
+          <p>{t("description")}</p>
           <div className={subtitle({ class: "mt-4" })}>
             Beautiful, fast and modern React UI library.
           </div>
