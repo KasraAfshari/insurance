@@ -103,11 +103,11 @@ export default function DashboardPage() {
           />
         </div>
 
-        <div className="mt-4">
+        <div className="mt-4 w-full">
           {isLoading && <span>form is loading ...</span>}
           {error && <span>Error !</span>}
           {data && (
-            <Table>
+            <Table className="w-full p-4">
               <TableHeader>
                 {["Id", ...data.columns].map((item, index) => (
                   <TableColumn key={index}>{item}</TableColumn>
