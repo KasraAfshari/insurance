@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@heroui/button";
 import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
@@ -24,11 +23,11 @@ import { Logo } from "@/components/icons";
 
 export const Navbar = () => {
   const { i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = React.useState(i18n.language);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    setCurrentLanguage(lng);
+  const changeLanguage = () => {
+    i18n.language === "en"
+      ? i18n.changeLanguage("fa")
+      : i18n.changeLanguage("en");
   };
 
   const searchInput = (
@@ -64,22 +63,6 @@ export const Navbar = () => {
           </Link>
         </NavbarBrand>
 
-        <Button
-          color="primary"
-          size="sm"
-          variant="faded"
-          onPress={() => changeLanguage("en")}>
-          English {currentLanguage === "en" && "✅"}
-        </Button>
-
-        <Button
-          color="primary"
-          size="sm"
-          variant="faded"
-          onPress={() => changeLanguage("fa")}>
-          فارسی {currentLanguage === "fa" && "✅"}
-        </Button>
-
         <div className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
@@ -101,9 +84,18 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end">
         <NavbarItem className="hidden sm:flex gap-2">
+          <Button
+            color="primary"
+            size="sm"
+            variant="faded"
+            isIconOnly
+            onPress={() => changeLanguage()}>
+            {i18n.language === "en" ? "فا" : "En"}
+          </Button>
           <Link isExternal href={siteConfig.links.github} title="GitHub">
             <GithubIcon className="text-default-500" />
           </Link>
+
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
@@ -118,8 +110,15 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
+          <Button
+            color="primary"
+            size="sm"
+            variant="faded"
+            isIconOnly
+            onPress={() => changeLanguage()}>
+            {i18n.language === "en" ? "فا" : "En"}
+          </Button>
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
