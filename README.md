@@ -1,8 +1,8 @@
-# Vite & HeroUI Template
+# Smart Insurance Portal
 
-This is a template for creating applications using Vite and HeroUI (v2).
+Deployed at here on Vercel:
 
-[Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
+(https://insurance-rouge.vercel.app/)
 
 ## Technologies Used
 
@@ -10,6 +10,7 @@ This is a template for creating applications using Vite and HeroUI (v2).
 - [HeroUI](https://heroui.com)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Tailwind Variants](https://tailwind-variants.org)
+- [Redux Tool Kit](https://redux-toolkit.js.org)
 - [TypeScript](https://www.typescriptlang.org)
 - [Framer Motion](https://www.framer.com/motion)
 
