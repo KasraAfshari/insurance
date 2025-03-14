@@ -103,7 +103,7 @@ export default function DashboardPage() {
           />
         </div>
 
-        <div className="mt-4 w-full">
+        <div className="mt-4">
           {isLoading && <span>form is loading ...</span>}
           {error && <span>Error !</span>}
           {data && (

@@ -17,10 +17,9 @@ export default function DefaultLayout({
         <Link
           isExternal
           className="flex items-center gap-1 text-current"
-          href="https://heroui.com"
           title="heroui.com homepage">
-          <span className="text-default-600">Smart </span>
-          <p className="text-primary">Insurance</p>
+          <span className="text-default-600">Smart Insurance by</span>
+          <p className="text-primary">afshari.kasra@gmail.com</p>
         </Link>
       </footer>
     </div>
