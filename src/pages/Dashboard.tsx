@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { title, subtitle } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { useTranslation } from "react-i18next";
 import {
-  Select,
-  SelectItem,
   DateRangePicker,
   Table,
   TableHeader,
@@ -12,35 +10,38 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Button,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { useGetFormsQuery } from "@/features/api/formsApi";
+import { FormDataProps } from "@/features/api/formsApi";
 
 export default function DashboardPage() {
   const { t } = useTranslation();
   const { data, error, isLoading } = useGetFormsQuery();
 
-  const [insuranceType, setInsuranceType] = useState<[]>([]);
-
+  const [insuranceType, setInsuranceType] = useState<string[]>([]);
   const [selectedType, setSelectedType] = useState<string>("");
-  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [filteredData, setFilteredData] = useState<FormDataProps[]>([]);
 
   useEffect(() => {
-    if (data && data.data) {
-      const types = data.data.map((item) => item["Insurance Type"]);
+    if (data?.data) {
+      const types = data?.data.map(
+        (item: FormDataProps) => item["Insurance Type"]
+      );
       setInsuranceType([...new Set(types)]);
     }
   }, [data]);
 
   useEffect(() => {
-    if (selectedType) {
-      const filtered = data?.data.filter(
-        (item) => item["Insurance Type"] === selectedType
-      );
-      setFilteredData(filtered);
-    } else {
-      setFilteredData(data?.data);
+    if (data?.data) {
+      if (selectedType) {
+        const filtered = data.data.filter(
+          (item: FormDataProps) => item["Insurance Type"] === selectedType
+        );
+        setFilteredData(filtered);
+      } else {
+        setFilteredData(data.data);
+      }
     }
   }, [selectedType, data]);
 
@@ -93,7 +94,6 @@ export default function DashboardPage() {
 
           <DateRangePicker
             size="sm"
-            //variant="bordered"
             className="max-w-xs"
             defaultValue={{
               start: parseDate("2024-04-01"),
@@ -104,6 +104,8 @@ export default function DashboardPage() {
         </div>
 
         <div className="mt-4 w-full">
+          {isLoading && <span>form is loading ...</span>}
+          {error && <span>Error !</span>}
           {data && (
             <Table>
               <TableHeader>
@@ -112,7 +114,7 @@ export default function DashboardPage() {
                 ))}
               </TableHeader>
               <TableBody>
-                {filteredData?.map((form: any) => (
+                {filteredData.map((form: FormDataProps) => (
                   <TableRow key={form.id}>
                     <TableCell>{form.id}</TableCell>
                     <TableCell>{form["Full Name"]}</TableCell>

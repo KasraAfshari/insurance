@@ -1,6 +1,6 @@
 import { baseApi } from "../baseApi";
 
-interface FormData {
+export interface FormDataProps {
   id: string;
   "Full Name": string;
   Age: number;
@@ -9,14 +9,14 @@ interface FormData {
   City: string;
 }
 
-interface FormsResponse {
+export interface SubmissionFormsProps {
   columns: string[];
-  data: FormData[];
+  data: FormDataProps[];
 }
 
 export const formsApiSlice = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getForms: builder.query<FormsResponse, void>({
+    getForms: builder.query<SubmissionFormsProps, void>({
       query: () => ({
         url: "/api/insurance/forms/submissions",
       }),
